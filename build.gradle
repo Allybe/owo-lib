@@ -49,6 +49,10 @@ allprojects {
         options.compilerArgs << "-Xmaxerrs" << "69420"
     }
 
+    base {
+        archivesName = archives_base_name
+    }
+
     java {
         def javaVersion = JavaVersion.toVersion(targetJavaVersion)
         if (JavaVersion.current() < javaVersion) {
@@ -62,7 +66,7 @@ allprojects {
 
     jar {
         from("LICENSE") {
-            rename { "${it}_${project.archivesBaseName}" }
+            rename { "${it}_${base.archivesName.get()}" }
         }
     }
 
